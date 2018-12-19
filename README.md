@@ -1,1 +1,1 @@
-# Bam.Core
+# Bam.js
