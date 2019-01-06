@@ -1,1 +1,1 @@
-# Bam.js
+# bamfjs
