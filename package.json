@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "mocha",
-    "pack": "npx webpack --config configs/tests.webpack.config.js"
+    "pack-monaco": "npx webpack --config configs/monaco.webpack.config.js",
+    "pack-tests": "npx webpack --config configs/tests.webpack.config.js"
   },
   "author": "Bryan Apellanes",
   "license": "MIT",
@@ -16,9 +17,12 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "colors": "^1.3.3",
+    "css-loader": "^2.1.0",
     "expect": "^23.6.0",
     "lodash": "^4.17.11",
     "monaco-editor": "^0.15.6",
+    "monaco-editor-webpack-plugin": "^1.7.0",
+    "style-loader": "^0.23.1",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {

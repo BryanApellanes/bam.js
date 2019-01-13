@@ -1,2 +1,2 @@
 var setupTest = require("./test/setup-test");
-console.log("all jedan tests ran");
+console.log("all tests ran");
