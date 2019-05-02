@@ -1,2 +1,7 @@
-var setupTest = require("./test/setup-test");
-console.log("all jedan tests ran");
+var bam = (function(){
+    var util = require("./system/util");
+    
+
+})()
+
+module.exports = bam;
