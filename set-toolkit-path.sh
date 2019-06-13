@@ -1,0 +1,1 @@
+[[ ":$PATH:" != *":~/.bam/toolkit/bin:"* ]] && PATH="~/.bam/toolkit/bin:${PATH}"
