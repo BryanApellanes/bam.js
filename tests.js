@@ -1,2 +1,2 @@
-var setupTest = require("./test/setup-test");
-console.log("all tests ran");
+var os = require('os');
+console.log(os.platform()); 

@@ -1,19 +1,21 @@
+var osRuntimes = require('./os-runtimes');
+
 var http = require('http');
 var fs = require('fs');
 var colors = require('colors');
 var path = require('path');
 var shell = require('shelljs');
 var AdmZip = require('adm-zip');
-var homeDir = require('os').homedir();
-var tmpDir = path.resolve(homeDir, ".bam", "tmp");
-var binDir = path.resolve(homeDir, ".bam", "toolkit", "bin");
-var downloadPath = path.resolve(tmpDir, "bamtoolkit.zip");
-var targetOs = process.argv[2] || 'windows';
+var os = require('os');
+var homeDir = os.homedir();
 
-if(targetOs !== "windows" && targetOs !== "linux" && targetOs !== "mac"){
-  console.log(`Invalid OS specified (${targetOs}), must be one of: windows, linux or mac`.red);
-  process.exit(1);
-}
+var runtime = osRuntimes[os.platform()];
+var toolName = process.argv[2] || 'bam';
+var requestFileName = `bamtoolkit-${toolName}-${runtime}.zip`;
+
+var tmpDir = path.resolve(homeDir, ".bam", "tmp");
+var binDir = path.resolve(homeDir, ".bam", "toolkit", toolName);
+var downloadPath = path.resolve(tmpDir, requestFileName);
 
 if(!fs.existsSync(tmpDir)){
   shell.mkdir('-p', tmpDir);
@@ -42,12 +44,13 @@ var unzip = function(path, extractTo){
   zip.extractAllTo(extractTo, true);
 }
 
-console.log('downloading bamtoolkit.zip'.cyan);
-download(`http://bamapps.net/download-${targetOs}-toolkit`, downloadPath, function(){
+console.log(`downloading ${toolName}`);
+download(`http://bamapps.net/download?fileName=${requestFileName}`, downloadPath, function(){
     console.log(`file downloaded to ${downloadPath}`.green);
     unzip(downloadPath, binDir);
     console.log(`unzipping complete`.green);
     console.log(`deleting file ${downloadPath}`.cyan);
     shell.rm(downloadPath);
     console.log(`delete complete`.green);
+    console.log(`set tool path with: 'source set-tool-path.sh ${toolName}'`)
 });
