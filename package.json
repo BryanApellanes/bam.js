@@ -1,6 +1,6 @@
 {
   "name": "@bryanapellanes/bam.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "BamFramework Javascript Client",
   "main": "main.js",
   "directories": {
