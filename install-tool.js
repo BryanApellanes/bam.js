@@ -14,7 +14,7 @@ var toolName = process.argv[2] || 'bam';
 var requestFileName = `bamtoolkit-${toolName}-${runtime}.zip`;
 
 var tmpDir = path.resolve(homeDir, ".bam", "tmp");
-var binDir = path.resolve(homeDir, ".bam", "toolkit", toolName);
+var binDir = path.resolve(homeDir, ".bam", "toolkit", runtime, toolName);
 var downloadPath = path.resolve(tmpDir, requestFileName);
 
 if(!fs.existsSync(tmpDir)){
@@ -52,5 +52,5 @@ download(`http://bamapps.net/download?fileName=${requestFileName}`, downloadPath
     console.log(`deleting file ${downloadPath}`.cyan);
     shell.rm(downloadPath);
     console.log(`delete complete`.green);
-    console.log(`set tool path with: 'source set-tool-path.sh ${toolName}'`)
+    console.log(`set tool path with: 'source set-tool-path.sh ${runtime} ${toolName}'`);
 });
