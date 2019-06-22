@@ -50,4 +50,5 @@ download(`http://bamapps.net/download-${targetOs}-toolkit`, downloadPath, functi
     console.log(`deleting file ${downloadPath}`.cyan);
     shell.rm(downloadPath);
     console.log(`delete complete`.green);
+    console.log(`set tool path with: 'source set-toolkit-path.sh ${runtime} ${toolName}'`);
 });

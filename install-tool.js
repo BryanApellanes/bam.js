@@ -1,4 +1,8 @@
-var osRuntimes = require('./os-runtimes');
+var osRuntimes = {
+  win32: "win10-x64", 
+  linux: "ubuntu.16.10-x64",
+  darwin: "osx-x64"
+};
 
 var http = require('http');
 var fs = require('fs');
@@ -11,11 +15,13 @@ var homeDir = os.homedir();
 
 var runtime = osRuntimes[os.platform()];
 var toolName = process.argv[2] || 'bam';
-var requestFileName = `bamtoolkit-${toolName}-${runtime}.zip`;
+var zipFileName = `bamtoolkit-${toolName}-${runtime}.zip`;
 
 var tmpDir = path.resolve(homeDir, ".bam", "tmp");
 var binDir = path.resolve(homeDir, ".bam", "toolkit", runtime, toolName);
-var downloadPath = path.resolve(tmpDir, requestFileName);
+var downloadPath = path.resolve(tmpDir, zipFileName);
+
+shell.rm('-fr', binDir);
 
 if(!fs.existsSync(tmpDir)){
   shell.mkdir('-p', tmpDir);
@@ -44,8 +50,8 @@ var unzip = function(path, extractTo){
   zip.extractAllTo(extractTo, true);
 }
 
-console.log(`downloading ${toolName}`);
-download(`http://bamapps.net/download?fileName=${requestFileName}`, downloadPath, function(){
+console.log(`downloading ${toolName}`.cyan);
+download(`http://bamapps.net/download?fileName=${zipFileName}`, downloadPath, function(){
     console.log(`file downloaded to ${downloadPath}`.green);
     unzip(downloadPath, binDir);
     console.log(`unzipping complete`.green);
