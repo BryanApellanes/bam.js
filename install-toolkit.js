@@ -1,3 +1,9 @@
+var osRuntimes = {
+  win32: "win10-x64", 
+  linux: "ubuntu.16.10-x64",
+  darwin: "osx-x64"
+};
+
 var http = require('http');
 var fs = require('fs');
 var colors = require('colors');
@@ -46,9 +52,11 @@ console.log('downloading bamtoolkit.zip'.cyan);
 download(`http://bamapps.net/download-${targetOs}-toolkit`, downloadPath, function(){
     console.log(`file downloaded to ${downloadPath}`.green);
     unzip(downloadPath, binDir);
-    console.log(`unzipping complete`.green);
+    console.log(`unzip complete`.green);
     console.log(`deleting file ${downloadPath}`.cyan);
     shell.rm(downloadPath);
     console.log(`delete complete`.green);
-    console.log(`set tool path with: 'source set-toolkit-path.sh ${runtime} ${toolName}'`);
+    shell.cp('./set-toolkit-path.sh', binDir);
+    console.log(`installed bam-toolkit to ${binDir}`.blue);
+    console.log(`set toolkit path with: 'source ${path.join(binDir, "set-toolkit-path.sh")}'`.yellow);
 });

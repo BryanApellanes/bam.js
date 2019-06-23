@@ -54,9 +54,11 @@ console.log(`downloading ${toolName}`.cyan);
 download(`http://bamapps.net/download?fileName=${zipFileName}`, downloadPath, function(){
     console.log(`file downloaded to ${downloadPath}`.green);
     unzip(downloadPath, binDir);
-    console.log(`unzipping complete`.green);
+    console.log(`unzip complete`.green);
     console.log(`deleting file ${downloadPath}`.cyan);
     shell.rm(downloadPath);
     console.log(`delete complete`.green);
-    console.log(`set tool path with: 'source set-tool-path.sh ${runtime} ${toolName}'`);
+    shell.cp('./set-tool-path.sh', binDir);
+    console.log(`installed ${toolName} to ${binDir}`.blue);
+    console.log(`set tool path with: 'source ${path.join(binDir, "set-tool-path.sh")} ${runtime} ${toolName}'`.yellow);
 });
