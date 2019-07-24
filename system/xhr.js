@@ -2,6 +2,15 @@ let xhr = (function(){
     var _ = _,
         xhrCtor = {};
 
+    var _settings = {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        getHeaders: function(combineWith) {
+            return _.extend(this.headers, combineWith);
+        }
+    }
+
     function createXhr(verb, headers, path){
         var xhr = new xhrCtor();
         xhr.open(verb, path);
@@ -68,15 +77,9 @@ let xhr = (function(){
         if(settings.XMLHttpRequest){
             xhrCtor = settings.XMLHttpRequest;
         }
-
-        var _settings = _.extend(settings, {
-            headers: {
-                "Content-Type": "application/json"
-            },
-            getHeaders: function(combineWith) {
-                return _.extend(this.headers, combineWith);
-            }
-        });
+        if(xhrCtor === null) {
+            xhrCtor = require("xmlhttprequest").XMLHttpRequest;
+        }
         
         return {
             get: (headers, path) => {

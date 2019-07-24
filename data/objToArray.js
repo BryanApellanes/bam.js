@@ -2,7 +2,6 @@ var obj = (function(){
 
     return {
         toArray: function(obj) {
-            debugger;
             var result = [];
             for(var prop in obj) {
                 result.push(obj[prop]);
@@ -12,5 +11,4 @@ var obj = (function(){
     }
 })()
 
-console.log('objToArray.js loaded');
 module.exports = obj;
