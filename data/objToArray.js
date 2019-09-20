@@ -12,3 +12,7 @@ var obj = (function(){
 })()
 
 module.exports = obj;
+
+if(undefined !== window){
+    window.obj = obj;
+}
