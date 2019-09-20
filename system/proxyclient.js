@@ -6,7 +6,7 @@ let proxyclient = (function(){
         url = require('url'),
         hosts = {},
         currentProtocol = 'http://',
-        currentHost = 'gloo-test.bamapps.net',
+        currentHost = 'test.bamapps.net',
         currentPath = '/serviceproxy/proxies.js',
         proxies = {};
 

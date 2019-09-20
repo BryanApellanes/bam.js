@@ -37,6 +37,16 @@ bam.exports = bam.exports || {};
             text: "text"
         };
 
+    function stringFormat() {
+        var s = arguments[0];
+        for (var i = 0; i < arguments.length - 1; i++) {
+            var reg = new RegExp("\\{" + i + "\\}", "gm");
+            s = s.replace(reg, arguments[i + 1]);
+        }
+
+        return s;
+    }
+
     /**
      * Sets the name of the current application.
      * Should be used specifically to help determine
@@ -226,7 +236,7 @@ bam.exports = bam.exports || {};
     function getInvokeConfig(args, urlFormat, format) {
         var strings = [],
             dataType = dataTypes[format] || "text",
-            url = _.format(urlFormat, format);
+            url = stringFormat(urlFormat, format);
 
         for (var i = 0; i < args.length; i++) {
             strings.push(JSON.stringify(args[i]));
@@ -270,7 +280,7 @@ bam.exports = bam.exports || {};
             args = a;
         }
 
-        var root = b.proxyRoot(b[className].proxyName),
+        var root = this.proxyRoot(this[className].proxyName),
             urlFormat = root + className + "/" + method + ".{0}?nocache=" + b.randomString(4) + "&",
             config = getInvokeConfig(args, urlFormat, format);
 
@@ -319,3 +329,8 @@ bam.exports = bam.exports || {};
     })
 })(bam, dao, jQuery, dust, _);
 
+module.exports = bam;
+
+if(undefined !== window){
+    window.bam = bam;
+}

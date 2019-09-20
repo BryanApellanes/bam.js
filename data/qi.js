@@ -241,3 +241,9 @@ var qi = function (cxName) {
 
 	return query;
 };
+
+module.exports = qi;
+
+if(undefined !== window){
+	window.qi = qi;
+}

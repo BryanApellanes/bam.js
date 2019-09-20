@@ -521,3 +521,8 @@ var dao = (function ($, _) {
     return returnValue;
 })(jQuery, _);
 /* dao */
+module.exports = dao;
+
+if(undefined !== window){
+    window.dao = dao;
+}
