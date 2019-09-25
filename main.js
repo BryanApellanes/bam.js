@@ -4,8 +4,7 @@
 
 module.exports = (function(){
     return function(bamRootPath){
-        var colors = require("colors"),
-            path = require("path"),    
+        var path = require("path"),    
             jsdom = require('jsdom'),
             bamRoot = bamRootPath;
         
@@ -13,7 +12,7 @@ module.exports = (function(){
         const jsDomObj = new JSDOM(``);
         
         if(typeof global === 'undefined'){
-            console.log('global not defined; instantiating as object'.yellow);
+            console.log('global not defined; instantiating as object');
             global = {};
         }
         
@@ -34,7 +33,7 @@ module.exports = (function(){
         
         function bamRequire(subPath, globalName){
             var fullPath = path.join(bamRoot, subPath);
-            console.log(`bamRequire: ${path}`.yellow);
+            console.log(`bamRequire: ${path}`);
             var module = require(fullPath);
             if(typeof global !== 'undefined' && globalName){
                 global[globalName] = module;
