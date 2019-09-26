@@ -17,6 +17,7 @@ let xhr = (function(){
         for(var header in headers){
             xhr.setRequestHeader(header, headers[header]);
         }
+        xhr.withCrednetials = true;
         return xhr;
     }
 
@@ -37,6 +38,7 @@ let xhr = (function(){
         headers = getHeaders(headers, path);    
         return new Promise((resolve, reject) => {
             var xhr = createXhr(verb, headers, path);
+            
             xhr.onreadystatechange = function() {
                 if(this.readyState == 4) {
                     if(this.status >= 200 && this.status <= 299){

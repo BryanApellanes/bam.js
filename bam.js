@@ -12,8 +12,8 @@ var bam = (function(){
             proxy: function(name, protocolInfo) {
                 proxies[name] = protocolInfo;
             },
-            addPage: (pageName) => {
-                
+            xhr: function() {
+                return require('../../js/bam/system/xhr.js')({lodash: _});
             }
         });
     }
