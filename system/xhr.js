@@ -98,6 +98,24 @@ let xhr = (function(){
             },
             patch: (data, headers, path) => {
                 return doBodyVerb(_settings, "PATCH", data, headers, path);
+            },
+            receiveJsonFromGet: (headers, path) => {
+                return new Promise((resolve, reject) => {
+                    this.get(headers, path)
+                        .then(data => {
+                            resolve(JSON.parse(data));
+                        })
+                        .catch(reject);
+                })
+            },
+            receiveJsonFromPost: (data, headers, path) => {
+                return new Promise((resolve, reject) => {
+                    this.post(data, headers, path)
+                        .then(data => {
+                            resolve(JSON.parse(data));
+                        })
+                        .catch(reject);
+                })
             }
         }
     } 
