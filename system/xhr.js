@@ -34,7 +34,7 @@ let xhr = (function(){
         return headers;
     }
 
-    function doBodyVerb(_settings, verb, data, headers, path){
+    function doBodyVerb(verb, data, headers, path){
         headers = getHeaders(headers, path);    
         return new Promise((resolve, reject) => {
             var xhr = createXhr(verb, headers, path);
@@ -52,7 +52,7 @@ let xhr = (function(){
         })
     }
 
-    function doVerb(_settings, verb, headers, path) {
+    function doVerb(verb, headers, path) {
         headers = getHeaders(headers, path);
         return new Promise((resolve, reject) => {
             var xhr = createXhr(verb, headers, path);
@@ -85,37 +85,32 @@ let xhr = (function(){
         
         return {
             get: (headers, path) => {
-                return doVerb(_settings, "GET", headers, path);
+                return doVerb("GET", headers, path);
             },
             delete: (headers, path) => {
-                return doVerb(_settings, "DELETE", headers, path);   
+                return doVerb("DELETE", headers, path);   
             },
             post: (data, headers, path) => {
-                return doBodyVerb(_settings, "POST", data, headers, path);
+                return doBodyVerb("POST", data, headers, path);
             },
             put: (data, headers, path) => {
-                return doBodyVerb(_settings, "PUT", data, headers, path);
+                return doBodyVerb("PUT", data, headers, path);
             },
             patch: (data, headers, path) => {
-                return doBodyVerb(_settings, "PATCH", data, headers, path);
+                return doBodyVerb("PATCH", data, headers, path);
+            },
+            receiveJson: (verb, data, headers, path) => {
+                return new Promise((resolve, reject) => {
+                    this[verb.toLowerCase()](data, headers, path)
+                            .then(x => resolve(JSON.parse(x.responseText)))
+                            .catch(reject);
+                });
             },
             receiveJsonFromGet: (headers, path) => {
-                return new Promise((resolve, reject) => {
-                    this.get(headers, path)
-                        .then(data => {
-                            resolve(JSON.parse(data));
-                        })
-                        .catch(reject);
-                })
+                return this.receiveJson("GET", headers, path);
             },
             receiveJsonFromPost: (data, headers, path) => {
-                return new Promise((resolve, reject) => {
-                    this.post(data, headers, path)
-                        .then(data => {
-                            resolve(JSON.parse(data));
-                        })
-                        .catch(reject);
-                })
+                return this.receiveJson("POST", data, headers, path);
             }
         }
     } 
