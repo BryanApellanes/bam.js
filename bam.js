@@ -1,6 +1,7 @@
 var bam = (function(){
     var options = {},
         _ = require('lodash'),
+        xhrCtor = require("xmlhttprequest").XMLHttpRequest,        
         util = require("./system/util");
 
     var proxies = {};
@@ -13,7 +14,7 @@ var bam = (function(){
                 proxies[name] = protocolInfo;
             },
             xhr: function(opts) {
-                var xhrObj = require('../../js/bam/system/xhr.js')({lodash: _});
+                var xhrObj = require('./system/xhr.js')(_.extend({lodash: _, XMLHttpRequest: xhrCtor}, opts));
                 if(!_.isUndefined(opts)){
                     var { data, headers, url, verb } = opts;
                     verb = verb || 'get';

@@ -155,12 +155,10 @@
                 slideIndex = 0;
             }
 
-            //config.beforeSlide(the);
             the.beforeSlide(the);
             var moveBy = getMoveBy(the.currentSlideIndex, slideIndex);
             $(the.itemContainer).animate({ left: moveBy.direction + moveBy.width + "px" }, "swing", function () {
                 the.setSlide(slideIndex);
-                //config.afterSlide(the);
                 the.afterSlide(the);
             });
         };

@@ -79,7 +79,7 @@ let xhr = (function(){
         if(settings.XMLHttpRequest){
             xhrCtor = settings.XMLHttpRequest;
         }
-        if(xhrCtor === null) {
+        if(xhrCtor === null || !_.isFunction(xhrCtor)) {
             xhrCtor = require("xmlhttprequest").XMLHttpRequest;
         }
         
