@@ -46,10 +46,7 @@ var fs = (function ($, _) {
     }
 
     function notImplemented() {
-        var val = $.Deferred(function () { }).promise();
-        val.reject({ message: "Not Implemented" });
-
-        return val;
+        return Promise.reject({ message: "Not Implemented" });
     }
 
     function local(v) {// prepping for future remote fs
