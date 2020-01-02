@@ -1,15 +1,17 @@
 var bam = (function(){
     var options = {},
         _ = require('lodash'),
-        xhrCtor = require("xmlhttprequest").XMLHttpRequest,        
-        util = require("./system/util");
+        xhrCtor = require("xmlhttprequest").XMLHttpRequest;
 
     var proxies = {};
     
     return function(opts) {
         options = _.extend({}, opts);
     
-        return _.extend({}, util, {
+        return _.extend({}, {
+            cli: function(){
+
+            },
             proxy: function(name, protocolInfo) {
                 proxies[name] = protocolInfo;
             },
@@ -38,6 +40,12 @@ var bam = (function(){
 
 module.exports = bam;
 
-if(undefined !== window){
+if(typeof(window) !== "undefined"){
     window.bam = bam;
+}
+
+console.log(process.argv[2]);
+
+if(bam()[process.argv[2]]){
+    console.log("yes");
 }
