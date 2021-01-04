@@ -27,7 +27,7 @@
     "mini-css-extract-plugin": "^0.5.0",
     "monaco-editor": "^0.15.6",
     "monaco-editor-webpack-plugin": "^1.7.0",
-    "node-forge": "^0.7.6",
+    "node-forge": "^0.10.0",
     "shelljs": "^0.8.3",
     "style-loader": "^0.23.1",
     "xmlhttprequest": "^1.8.0"
