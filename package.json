@@ -1,6 +1,6 @@
 {
   "name": "@bamapps/bam.js",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "BamFramework Javascript Client",
   "main": "bam.js",
   "directories": {
