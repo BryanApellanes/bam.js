@@ -8,7 +8,8 @@ var cli = (function(){
     return _.extend({}, bam, {
         add: function(){
 
-        }
+        },
+        
     });
 })()
 
